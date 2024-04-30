@@ -1,0 +1,263 @@
+.chatContainer {
+  padding: 0 20px;
+  width: inherit;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .chatContainer {
+    width: 500px;
+    position: relative;
+  }
+}
+.header {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header button {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selectedProduct {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 34px;
+  letter-spacing: -0.025em;
+  color: black;
+  text-align: center;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.selectedProduct div {
+  display: flex;
+  align-items: center;
+}
+.selectedProduct div img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+.selectedProduct div p {
+  margin-left: 12px;
+}
+.selectedProduct svg {
+  margin-left: 6px;
+}
+.productModal {
+  position: absolute;
+  width: 100%;
+  top: 56px;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 0 10px 16px 10px;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.06));
+  /* 아이폰 대응 */
+  backdrop-filter: blur(0);
+  z-index: 10;
+}
+.productModal img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+.productList {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+}
+.productList p {
+  margin-left: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.025em;
+}
+.productList div:first-child {
+  display: flex;
+  align-items: center;
+}
+.clickProduct {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-radius: 16px;
+  justify-content: space-between;
+}
+.clickProduct svg {
+  margin-right: 6px;
+}
+.modalButtonBox {
+  display: flex;
+  margin-top: 16px;
+  justify-content: space-between;
+  padding: 0px 10px;
+}
+.modalButtonBox button {
+  width: 164px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modalButtonBox button:first-child {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 34px;
+  letter-spacing: -0.025em;
+  color: black;
+}
+.modalButtonBox button:nth-child(2) {
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 34px;
+  letter-spacing: -0.025em;
+}
+.chatContent {
+  margin: 24px 0;
+  /* margin-bottom: 24px; */
+  flex: 1;
+  overflow-y: scroll;
+}
+.chatContent::-webkit-scrollbar {
+  display: none;
+}
+.noSelectedProduct {
+  margin-left: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.025em;
+  color: #767676;
+}
+.templateImage {
+  background-image: url('/img/templateImage.png');
+  background-size: cover;
+  background-position: center;
+  height: 350px;
+  border-radius: 24px;
+  margin-top: 24px;
+  position: relative;
+}
+.templateImage button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 14px 16px;
+  color: white;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.025em;
+}
+.messageBox {
+  margin-top: 24px;
+}
+.userMessage,
+.aiMessage {
+  padding: 12px;
+}
+.userMessage {
+  display: flex;
+  align-items: center;
+}
+.userMessage div {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.025em;
+}
+.userMessage p {
+  margin-left: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.025em;
+  color: #767676;
+}
+.aiMessage p:first-child {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.025em;
+}
+.aiMessage p:nth-child(2) {
+  margin-top: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.025em;
+}
+.inputBox {
+  display: flex;
+  margin-bottom: 40px;
+  align-items: flex-end;
+}
+.inputBox textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 24px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.025em;
+  color: #bbbbbb;
+}
+.inputBox textarea::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.025em;
+  color: #bbbbbb;
+}
+.inputBox textarea:focus {
+  outline: none;
+}
+.isTyping textarea {
+  border: 1px solid black;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.1));
+  /* 아이폰 대응 */
+  backdrop-filter: blur(0);
+  font-weight: 400;
+  color: black;
+}
+.inputBox button {
+  width: 48px;
+  height: 48px;
+  border: none;
+  background-color: rgba(118, 118, 118, 0.2);
+  padding: 12px;
+  border-radius: 24px;
+  margin-left: 8px;
+}
+.isTyping button {
+  background-color: black;
+}
+.inputBox button svg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
