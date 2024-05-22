@@ -23,6 +23,7 @@
   border: none;
   background: transparent;
   display: flex;
+  z-index: 1;
 }
 .title p {
   position: absolute;

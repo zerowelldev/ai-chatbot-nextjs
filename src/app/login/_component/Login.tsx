@@ -1,7 +1,19 @@
+'use client';
+
 import BackButton from '@/app/_component/BackButton';
 import style from './login.module.css';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
+  const router = useRouter();
+
+  const findCredentialsBtn = () => {
+    alert('서비스 준비중입니다.');
+  };
+  const redirectToSignup = () => {
+    router.replace('/signup');
+  };
+
   return (
     <div className={style.loginContainer}>
       <div className={style.loginForm}>
@@ -18,7 +30,10 @@ export default function Login() {
           <input placeholder='비밀번호를 입력해주세요' />
         </div>
         <div>
-          <button className={style.findCredentialsBtn}>
+          <button
+            className={style.findCredentialsBtn}
+            onClick={findCredentialsBtn}
+          >
             아이디/비밀번호 찾기
           </button>
         </div>
@@ -26,7 +41,7 @@ export default function Login() {
       </div>
       <div className={style.redirectToSignup}>
         <p>아직 회원이 아니신가요?</p>
-        <button>회원가입</button>
+        <button onClick={redirectToSignup}>회원가입</button>
       </div>
     </div>
   );

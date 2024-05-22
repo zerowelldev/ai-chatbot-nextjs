@@ -1,7 +1,16 @@
+'use client';
+
 import BackButton from '@/app/_component/BackButton';
 import style from './signup.module.css';
+import { useRouter } from 'next/navigation';
 
 export default function Signup() {
+  const router = useRouter();
+
+  const redirectToLogin = () => {
+    router.replace('/login');
+  };
+
   return (
     <div className={style.loginContainer}>
       <div className={style.loginForm}>
@@ -25,7 +34,7 @@ export default function Signup() {
       </div>
       <div className={style.redirectToLogin}>
         <p>이미 계정이 있으신가요?</p>
-        <button>로그인</button>
+        <button onClick={redirectToLogin}>로그인</button>
       </div>
     </div>
   );
