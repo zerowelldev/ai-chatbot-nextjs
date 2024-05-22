@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
-import BackButton from '@/app/chat/_component/BackButton';
+import BackButton from '@/app/_component/BackButton';
 import NewChatButtonIcon from '@/app/chat/_component/NewChatButtonIcon';
 
 import styles from './chatSession.module.css';

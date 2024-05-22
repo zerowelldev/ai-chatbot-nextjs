@@ -25,6 +25,10 @@ export default function Main() {
   const router = useRouter();
   const productStore = useProductStore();
 
+  const redirectToLogin = () => {
+    router.push('/login');
+  };
+
   const handleSessionNavigation = (sessionId: string) => {
     if (data) {
       productStore.setProductId(data[0].Chats[0].Product.productId);
@@ -36,7 +40,10 @@ export default function Main() {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.title}>
-        <h1>ZEROWELL AI</h1>
+        <div>
+          <h1>ZEROWELL AI</h1>
+          <button onClick={redirectToLogin}>로그인</button>
+        </div>
         <p>상품에 대해 궁금한 건 뭐든지 물어보세요</p>
       </div>
       <div className={styles.mainImageDiv}>

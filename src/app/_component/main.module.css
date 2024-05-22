@@ -20,6 +20,21 @@
 .title {
   padding: 20px 20px 0;
 }
+.title div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title div button {
+  border: none;
+  background: transparent;
+  margin-right: 8px;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: -0.025em;
+  color: #767676;
+}
 .title h1 {
   font-weight: 600;
   font-size: 24px;

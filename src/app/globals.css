@@ -105,6 +105,10 @@ button {
   cursor: pointer;
 }
 
+input {
+  font-family: inherit;
+}
+
 textarea {
   font-family: inherit;
   resize: none;
