@@ -3,6 +3,24 @@
 import BackButton from '@/app/_component/BackButton';
 import style from './signup.module.css';
 import { useRouter } from 'next/navigation';
+import { useFormState, useFormStatus } from 'react-dom';
+import onSubmit from '../_lib/signup';
+
+function getErrorMessage(message: string | null) {
+  if (message === 'no_id') {
+    return '아이디를 입력하세요';
+  }
+  if (message === 'no_password') {
+    return '비밀번호를 입력하세요.';
+  }
+  if (message === 'password_mismatch') {
+    return '비밀번호가 일치하지 않습니다.';
+  }
+  if (message === 'user_exists') {
+    return '이미 사용중인 아이디입니다.';
+  }
+  return '';
+}
 
 export default function Signup() {
   const router = useRouter();
@@ -11,9 +29,12 @@ export default function Signup() {
     router.replace('/login');
   };
 
+  const [state, formAction] = useFormState(onSubmit, { message: null });
+  const { pending } = useFormStatus();
+
   return (
     <div className={style.loginContainer}>
-      <form className={style.loginForm}>
+      <form action={formAction} className={style.loginForm}>
         <div className={style.title}>
           <BackButton />
           <p>회원가입</p>
@@ -54,9 +75,10 @@ export default function Signup() {
             required
           />
         </div>
-        <button type='submit' className={style.loginButton}>
+        <button type='submit' className={style.loginButton} disabled={pending}>
           회원가입
         </button>
+        {getErrorMessage(state?.message)}
       </form>
       <div className={style.redirectToLogin}>
         <p>이미 계정이 있으신가요?</p>
