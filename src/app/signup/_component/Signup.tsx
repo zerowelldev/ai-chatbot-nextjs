@@ -13,25 +13,51 @@ export default function Signup() {
 
   return (
     <div className={style.loginContainer}>
-      <div className={style.loginForm}>
+      <form className={style.loginForm}>
         <div className={style.title}>
           <BackButton />
           <p>회원가입</p>
         </div>
         <div className={style.idDiv}>
-          <p>아이디</p>
-          <input placeholder='아이디를 입력해주세요' />
+          <label className={style.inputLabel} htmlFor='id'>
+            아이디
+          </label>
+          <input
+            id='id'
+            name='id'
+            type='text'
+            placeholder='아이디를 입력해주세요'
+            required
+          />
         </div>
         <div className={style.passwordDiv}>
-          <p>비밀번호</p>
-          <input placeholder='비밀번호를 입력해주세요' />
+          <label className={style.inputLabel} htmlFor='password'>
+            비밀번호
+          </label>
+          <input
+            id='password'
+            name='password'
+            type='password'
+            placeholder='비밀번호를 입력해주세요'
+            required
+          />
         </div>
         <div className={style.passwordCheckDiv}>
-          <p>비밀번호 확인</p>
-          <input placeholder='비밀번호를 다시 입력해주세요' />
+          <label className={style.inputLabel} htmlFor='passwordConfirm'>
+            비밀번호 확인
+          </label>
+          <input
+            id='passwordConfirm'
+            name='passwordConfirm'
+            type='password'
+            placeholder='비밀번호를 다시 입력해주세요'
+            required
+          />
         </div>
-        <button className={style.loginButton}>회원가입</button>
-      </div>
+        <button type='submit' className={style.loginButton}>
+          회원가입
+        </button>
+      </form>
       <div className={style.redirectToLogin}>
         <p>이미 계정이 있으신가요?</p>
         <button onClick={redirectToLogin}>로그인</button>

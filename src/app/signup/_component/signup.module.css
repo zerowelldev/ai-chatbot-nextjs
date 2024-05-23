@@ -39,15 +39,11 @@
 .idDiv {
   margin-top: 24px;
 }
-.passwordDiv {
-  margin-top: 20px;
-}
+.passwordDiv,
 .passwordCheckDiv {
   margin-top: 20px;
 }
-.idDiv p,
-.passwordDiv p,
-.passwordCheckDiv p {
+.inputLabel {
   margin-left: 8px;
   font-weight: 400;
   font-size: 14px;
