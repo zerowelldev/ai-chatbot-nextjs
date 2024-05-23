@@ -4,6 +4,7 @@ import BackButton from '@/app/_component/BackButton';
 import style from './login.module.css';
 import { useRouter } from 'next/navigation';
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import { signIn } from 'next-auth/react';
 
 export default function Login() {
   const router = useRouter();
@@ -19,8 +20,26 @@ export default function Login() {
     router.replace('/signup');
   };
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
+    try {
+      const response = await signIn('credentials', {
+        username: id,
+        password,
+        redirect: false,
+      });
+      if (!response?.ok) {
+        setErrorMessage('아이디와 비밀번호가 일치하지 않습니다');
+      } else {
+        console.log(response);
+
+        // router.replace('/');
+      }
+    } catch (error) {
+      console.error(error);
+      setErrorMessage('아이디와 비밀번호가 일치하지 않습니다.');
+    }
   };
   const onChangeId: ChangeEventHandler<HTMLInputElement> = (e) => {
     setId(e.target.value);

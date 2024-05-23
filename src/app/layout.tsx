@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import RQProvider from '@/app/_component/RQProvider';
 
 import styles from './_component/main.module.css';
+import AuthSession from './_component/AuthSession';
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -24,7 +25,9 @@ export default function RootLayout({ children }: Props) {
     <html lang='ko'>
       <body className={pretendard.className}>
         <div className={styles.container}>
-          <RQProvider>{children}</RQProvider>
+          <AuthSession>
+            <RQProvider>{children}</RQProvider>
+          </AuthSession>
         </div>
       </body>
     </html>

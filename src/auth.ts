@@ -32,6 +32,8 @@ export const {
         //   const parsed = cookie.parse(setCookie);
         //   cookies().set('connect.sid', parsed['connect.sid'], parsed); // 브라우저에 쿠키를 심어주는 것
         // }
+        console.log('여기', authResponse);
+
         if (!authResponse.ok) {
           return null;
         }
