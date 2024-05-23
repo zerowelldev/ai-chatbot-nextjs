@@ -29,12 +29,11 @@ export default function Login() {
         password,
         redirect: false,
       });
+
       if (!response?.ok) {
         setErrorMessage('아이디와 비밀번호가 일치하지 않습니다');
       } else {
-        console.log(response);
-
-        // router.replace('/');
+        router.replace('/');
       }
     } catch (error) {
       console.error(error);

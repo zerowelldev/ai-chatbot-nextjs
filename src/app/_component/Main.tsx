@@ -10,11 +10,18 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
 import { useRouter } from 'next/navigation';
 import { useProductStore } from '@/store/product';
+import { signOut } from 'next-auth/react';
+import { Session } from '@auth/core/types';
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime);
 
-export default function Main() {
+type Props = {
+  me: Session | null;
+};
+export default function Main({ me }: Props) {
+  console.log(me);
+
   const { data } = useQuery<ISession[]>({
     queryKey: ['sessions'],
     queryFn: getSessions,
@@ -27,6 +34,15 @@ export default function Main() {
 
   const redirectToLogin = () => {
     router.push('/login');
+  };
+  const onClickLogout = () => {
+    signOut({ redirect: false }).then(() => {
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      router.replace('/');
+    });
   };
 
   const handleSessionNavigation = (sessionId: string) => {
@@ -42,7 +58,11 @@ export default function Main() {
       <div className={styles.title}>
         <div>
           <h1>ZEROWELL AI</h1>
-          <button onClick={redirectToLogin}>로그인</button>
+          {me?.user ? (
+            <button onClick={onClickLogout}>로그아웃</button>
+          ) : (
+            <button onClick={redirectToLogin}>로그인</button>
+          )}
         </div>
         <p>상품에 대해 궁금한 건 뭐든지 물어보세요</p>
       </div>
