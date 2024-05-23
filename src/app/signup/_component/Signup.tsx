@@ -34,11 +34,11 @@ export default function Signup() {
 
   return (
     <div className={style.loginContainer}>
+      <div className={style.title}>
+        <BackButton />
+        <p>회원가입</p>
+      </div>
       <form action={formAction} className={style.loginForm}>
-        <div className={style.title}>
-          <BackButton />
-          <p>회원가입</p>
-        </div>
         <div className={style.idDiv}>
           <label className={style.inputLabel} htmlFor='id'>
             아이디
