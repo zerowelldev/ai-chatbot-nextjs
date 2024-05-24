@@ -2,8 +2,13 @@
 
 import BackButton from '@/app/_component/BackButton';
 import style from './login.module.css';
-import { useRouter } from 'next/navigation';
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import {
+  ChangeEventHandler,
+  FormEventHandler,
+  useEffect,
+  useState,
+} from 'react';
 import { signIn } from 'next-auth/react';
 
 export default function Login() {
@@ -12,6 +17,9 @@ export default function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const searchParams = useSearchParams();
+  const code = searchParams.get('code');
 
   const findCredentialsBtn = () => {
     alert('서비스 준비중입니다.');

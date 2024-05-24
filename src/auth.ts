@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth';
+import NextAuth, { CredentialsSignin } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { cookies } from 'next/headers';
 import cookie from 'cookie';
@@ -12,7 +12,16 @@ export const {
     signIn: '/login',
     newUser: '/signup',
   },
-  callbacks: {},
+  callbacks: {
+    jwt({ token }) {
+      // console.log('auth.ts jwt', token);
+      return token;
+    },
+    session({ session, token }) {
+      // console.log('session callback', session, token);
+      return session;
+    },
+  },
   events: {},
   providers: [
     CredentialsProvider({
@@ -30,15 +39,20 @@ export const {
             }),
           }
         );
+        console.log(authResponse.status, authResponse.statusText);
+        if (!authResponse.ok) {
+          const credentialsSignin = new CredentialsSignin();
+          if (authResponse.status === 404) {
+            credentialsSignin.code = 'invalid_auth';
+          }
+          throw credentialsSignin;
+        }
+
         let setCookie = authResponse.headers.get('Set-Cookie');
         console.log('set-cookie', setCookie);
         if (setCookie) {
           const parsed = cookie.parse(setCookie);
-          cookies().set('connect.sid', parsed['connect.sid'], parsed); // 브라우저에 쿠키를 심어주는 것
-        }
-
-        if (!authResponse.ok) {
-          return null;
+          cookies().set('connect.sid', parsed['connect.sid'], parsed);
         }
 
         const user = await authResponse.json();

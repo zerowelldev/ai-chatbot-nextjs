@@ -1,7 +1,6 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import NewChatButton from './NewChatButton';
 import styles from './main.module.css';
 import { getSessions } from '../_lib/getSessions';
 import { Session as ISession } from '../model/Session';
@@ -32,12 +31,13 @@ export default function Main() {
     router.push('/login');
   };
   const onClickLogout = () => {
-    signOut({ redirect: false }).then(() => {
+    signOut({ redirect: true }).then(() => {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`, {
         method: 'GET',
         credentials: 'include',
       });
       router.replace('/');
+      router.refresh();
     });
   };
 
@@ -69,7 +69,7 @@ export default function Main() {
               <h2>지금 바로 시작해보세요</h2>
               <p>제로웰 AI가 여러분을 기다립니다</p>
             </div>
-            <NewChatButton />
+            <button onClick={() => router.push('/chat')}>대화하기</button>
           </div>
         </div>
       </div>
