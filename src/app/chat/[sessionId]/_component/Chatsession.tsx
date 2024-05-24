@@ -50,7 +50,6 @@ export default function ChatSession({ sessionId }: Props) {
     staleTime: 60 * 1000,
     gcTime: 300 * 1000,
   });
-  // 나중에 꼭! 세션 데이터 없을때 로직 추가하기
 
   const productStore = useProductStore();
   useEffect(() => {

@@ -21,9 +21,6 @@ export default function ChatForm({ sessionId, setResponseReceived }: Props) {
     mutationFn: async (e: FormEvent) => {
       e.preventDefault();
       setResponseReceived(false);
-      // 해야할 일
-      // 헤더 컴포넌트로 빼내고 상태관리 로직 추가
-      // userId 생성 로직 추가
       let data = {
         userId: 'fd6c215a-55b7-4f83-9f00-e37eac2d560a',
         sessionId,
@@ -45,7 +42,6 @@ export default function ChatForm({ sessionId, setResponseReceived }: Props) {
       setUserMessage('');
       if (queryClient.getQueryData(['session', sessionId])) {
         queryClient.setQueryData(['session', sessionId], (prevData: Chat[]) => {
-          // 현재는 첫번째 객체를 복사해서 사용 -> chatId가 중복되는 문제 -> 나중에 해결할것!
           const userMessageObj = {
             ...prevData[0],
             type: 'user',
