@@ -20,8 +20,6 @@ type Props = {
   me: Session | null;
 };
 export default function Main({ me }: Props) {
-  console.log(me);
-
   const { data } = useQuery<ISession[]>({
     queryKey: ['sessions'],
     queryFn: getSessions,
@@ -58,7 +56,7 @@ export default function Main({ me }: Props) {
       <div className={styles.title}>
         <div>
           <h1>ZEROWELL AI</h1>
-          {me?.user ? (
+          {me?.user?.email ? (
             <button onClick={onClickLogout}>로그아웃</button>
           ) : (
             <button onClick={redirectToLogin}>로그인</button>
