@@ -12,16 +12,7 @@ export const {
     signIn: '/login',
     newUser: '/signup',
   },
-  callbacks: {
-    jwt({ token }) {
-      // console.log('auth.ts jwt', token);
-      return token;
-    },
-    session({ session, token }) {
-      // console.log('session callback', session, token);
-      return session;
-    },
-  },
+  callbacks: {},
   events: {},
   providers: [
     CredentialsProvider({
@@ -39,7 +30,6 @@ export const {
             }),
           }
         );
-        console.log(authResponse.status, authResponse.statusText);
         if (!authResponse.ok) {
           const credentialsSignin = new CredentialsSignin();
           if (authResponse.status === 404) {
@@ -49,14 +39,12 @@ export const {
         }
 
         let setCookie = authResponse.headers.get('Set-Cookie');
-        console.log('set-cookie', setCookie);
         if (setCookie) {
           const parsed = cookie.parse(setCookie);
           cookies().set('connect.sid', parsed['connect.sid'], parsed);
         }
 
         const user = await authResponse.json();
-        console.log(user);
 
         return {
           email: user.userId,

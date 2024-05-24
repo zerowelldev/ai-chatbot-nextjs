@@ -2,13 +2,8 @@
 
 import BackButton from '@/app/_component/BackButton';
 import style from './login.module.css';
-import { useRouter, useSearchParams } from 'next/navigation';
-import {
-  ChangeEventHandler,
-  FormEventHandler,
-  useEffect,
-  useState,
-} from 'react';
+import { useRouter } from 'next/navigation';
+import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import { signIn } from 'next-auth/react';
 
 export default function Login() {
@@ -18,16 +13,6 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const searchParams = useSearchParams();
-  const code = searchParams.get('code');
-
-  const findCredentialsBtn = () => {
-    alert('서비스 준비중입니다.');
-  };
-  const redirectToSignup = () => {
-    router.replace('/signup');
-  };
-
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setErrorMessage('');
@@ -35,6 +20,7 @@ export default function Login() {
       const response = await signIn('credentials', {
         username: id,
         password,
+        // redirect를 true로 바꾸면 auth.ts에서 백엔드 메시지 쿼리스트링에 포함
         redirect: false,
       });
 
@@ -89,7 +75,7 @@ export default function Login() {
         <div>
           <button
             className={style.findCredentialsBtn}
-            onClick={findCredentialsBtn}
+            onClick={() => alert('서비스 준비중입니다.')}
           >
             아이디/비밀번호 찾기
           </button>
@@ -101,7 +87,7 @@ export default function Login() {
       </form>
       <div className={style.redirectToSignup}>
         <p>아직 회원이 아니신가요?</p>
-        <button onClick={redirectToSignup}>회원가입</button>
+        <button onClick={() => router.replace('/signup')}>회원가입</button>
       </div>
     </div>
   );

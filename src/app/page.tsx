@@ -5,8 +5,11 @@ import {
 } from '@tanstack/react-query';
 import Main from './_component/Main';
 import { getSessions } from './_lib/getSessions';
+import { auth } from '@/auth';
 
 export default async function Home() {
+  const session = await auth();
+
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ['sessions'],
@@ -16,7 +19,7 @@ export default async function Home() {
 
   return (
     <HydrationBoundary state={dehydrateState}>
-      <Main />
+      <Main me={session} />
     </HydrationBoundary>
   );
 }

@@ -8,12 +8,18 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Chat } from '@/app/model/Chat';
 import ChatLoading from './ChatLoading';
 import { v4 as uuidv4 } from 'uuid';
+import { Session } from '@auth/core/types';
 
 type Props = {
+  me: Session | null;
   sessionId: string;
   setResponseReceived: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export default function ChatForm({ sessionId, setResponseReceived }: Props) {
+export default function ChatForm({
+  me,
+  sessionId,
+  setResponseReceived,
+}: Props) {
   const [userMessage, setUserMessage] = useState('');
   const queryClient = useQueryClient();
 
@@ -22,7 +28,7 @@ export default function ChatForm({ sessionId, setResponseReceived }: Props) {
       e.preventDefault();
       setResponseReceived(false);
       let data = {
-        userId: 'fd6c215a-55b7-4f83-9f00-e37eac2d560a',
+        userId: me?.user?.email,
         sessionId,
         productId: 'ZWIM-0151',
         userMessage,

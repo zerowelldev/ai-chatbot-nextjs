@@ -14,7 +14,6 @@ import { auth } from './auth';
 
 export async function middleware() {
   const session = await auth();
-  console.log('로그인 후', session);
 
   if (!session) {
     return NextResponse.redirect('http://localhost:3000/login');

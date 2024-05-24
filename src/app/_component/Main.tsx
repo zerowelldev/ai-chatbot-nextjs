@@ -9,14 +9,16 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
 import { useRouter } from 'next/navigation';
 import { useProductStore } from '@/store/product';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+import { Session } from '@auth/core/types';
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime);
 
-export default function Main() {
-  const { data: me } = useSession();
-
+type Props = {
+  me: Session | null;
+};
+export default function Main({ me }: Props) {
   const { data } = useQuery<ISession[]>({
     queryKey: ['sessions'],
     queryFn: getSessions,
@@ -27,9 +29,6 @@ export default function Main() {
   const router = useRouter();
   const productStore = useProductStore();
 
-  const redirectToLogin = () => {
-    router.push('/login');
-  };
   const onClickLogout = () => {
     signOut({ redirect: true }).then(() => {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`, {
@@ -57,7 +56,7 @@ export default function Main() {
           {me?.user?.email ? (
             <button onClick={onClickLogout}>로그아웃</button>
           ) : (
-            <button onClick={redirectToLogin}>로그인</button>
+            <button onClick={() => router.push('/login')}>로그인</button>
           )}
         </div>
         <p>상품에 대해 궁금한 건 뭐든지 물어보세요</p>
@@ -75,8 +74,8 @@ export default function Main() {
       </div>
       <h3>최근 대화</h3>
       <div className={styles.recentContainer}>
-        {data ? (
-          data.map((session) => (
+        {data?.length !== 0 ? (
+          data?.map((session) => (
             <div className={styles.chatSessionCard} key={session.sessionId}>
               <img
                 src={`/img/products/${session.Chats[0].Product.productId}.jpg`}

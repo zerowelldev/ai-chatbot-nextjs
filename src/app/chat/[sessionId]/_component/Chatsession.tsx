@@ -12,6 +12,7 @@ import { Chat } from '@/app/model/Chat';
 import { getSessionChats } from '../_lib/getSessionChats';
 import ChatForm from './ChatForm';
 import { useProductStore } from '@/store/product';
+import { useSession } from 'next-auth/react';
 
 let products = [
   {
@@ -44,6 +45,7 @@ type Props = {
   sessionId: string;
 };
 export default function ChatSession({ sessionId }: Props) {
+  const { data: me } = useSession();
   const { data } = useQuery<Chat[], object, Chat[], [_1: string, _2: string]>({
     queryKey: ['session', sessionId],
     queryFn: getSessionChats,
@@ -190,6 +192,7 @@ export default function ChatSession({ sessionId }: Props) {
         </div>
       </div>
       <ChatForm
+        me={me}
         sessionId={sessionId}
         setResponseReceived={setResponseReceived}
       />
