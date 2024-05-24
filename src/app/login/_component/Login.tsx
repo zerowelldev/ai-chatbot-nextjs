@@ -30,14 +30,14 @@ export default function Login() {
         redirect: false,
       });
 
-      if (!response?.ok) {
-        setErrorMessage('아이디와 비밀번호가 일치하지 않습니다');
+      if (response?.error) {
+        setErrorMessage('아이디 또는 비밀번호가 일치하지 않습니다');
       } else {
         router.replace('/');
       }
     } catch (error) {
       console.error(error);
-      setErrorMessage('아이디와 비밀번호가 일치하지 않습니다.');
+      setErrorMessage('아이디 또는 비밀번호가 일치하지 않습니다.');
     }
   };
   const onChangeId: ChangeEventHandler<HTMLInputElement> = (e) => {
