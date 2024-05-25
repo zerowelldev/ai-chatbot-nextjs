@@ -9,7 +9,6 @@ import { getSessionChats } from './_lib/getSessionChats';
 type Props = {
   params: { sessionId: string };
 };
-
 export default async function Page({ params }: Props) {
   const { sessionId } = params;
   const queryClient = new QueryClient();

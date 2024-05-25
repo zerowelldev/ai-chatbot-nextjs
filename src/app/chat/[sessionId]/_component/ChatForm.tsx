@@ -70,6 +70,10 @@ export default function ChatForm({
     setUserMessage(e.target.value);
   };
 
+  if (!me?.user?.email) {
+    return null;
+  }
+
   return (
     <form
       className={`${styles.inputBox} ${userMessage !== '' && styles.isTyping}`}

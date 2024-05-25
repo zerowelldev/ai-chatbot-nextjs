@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import BackButton from '../../_component/BackButton';
@@ -8,6 +8,7 @@ import NewChatButtonIcon from './NewChatButtonIcon';
 
 import styles from './newChat.module.css';
 import { useProductStore } from '@/store/product';
+import { useSession } from 'next-auth/react';
 
 let products = [
   {
@@ -35,12 +36,20 @@ let products = [
     activate: false,
   },
 ];
-
 export default function NewChat() {
+  const { data: me } = useSession();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!me?.user?.email) {
+      router.replace('/login');
+    }
+  }, []);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [clickProductId, setClickProductId] = useState('');
 
-  const router = useRouter();
   const productStore = useProductStore();
 
   const handleProductModal = () => {

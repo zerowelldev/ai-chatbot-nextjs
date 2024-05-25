@@ -98,7 +98,11 @@ export default function ChatSession({ sessionId }: Props) {
     <div className={styles.chatContainer}>
       <div className={styles.header}>
         <BackButton />
-        <button className={styles.selectedProduct} onClick={handleProductModal}>
+        <button
+          className={styles.selectedProduct}
+          onClick={handleProductModal}
+          disabled={!me?.user?.email}
+        >
           {productStore.productId !== '상품 선택' ? (
             <div>
               <img src={`/img/products/${productStore.productId}.jpg`} />

@@ -9,16 +9,13 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
 import { useRouter } from 'next/navigation';
 import { useProductStore } from '@/store/product';
-import { signOut } from 'next-auth/react';
-import { Session } from '@auth/core/types';
+import { signOut, useSession } from 'next-auth/react';
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime);
 
-type Props = {
-  me: Session | null;
-};
-export default function Main({ me }: Props) {
+export default function Main() {
+  const { data: me } = useSession();
   const { data } = useQuery<ISession[]>({
     queryKey: ['sessions'],
     queryFn: getSessions,
