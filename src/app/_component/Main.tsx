@@ -16,6 +16,7 @@ dayjs.extend(relativeTime);
 
 export default function Main() {
   const { data: me } = useSession();
+
   const { data } = useQuery<ISession[]>({
     queryKey: ['sessions'],
     queryFn: getSessions,
